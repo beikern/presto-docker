@@ -8,6 +8,23 @@ Presto docker image based on alpine
 * Hadoop nativelib in `plugin/hive-hadoop2/hadoop-apache2-2.7.4-5.jar` is replaced with alpine built lib
 
 ```
+
+Build the docker images with the following command
+
+```sudo docker build --build-arg VERSION=0.217 -t mypresto .```
+
+Modify /etc/hosts with the following entry:
+
+```127.0.0.1       coordinator-1.example.com```
+
+the JDBC entry must be something like this:
+
+```jdbc:presto://coordinator-1.example.com:8081?SSL=true&SSLKeyStorePath={path_to_keystore}&SSLKeyStorePassword=example```
+
+JDBC parameter reference here -> https://prestodb.github.io/docs/current/installation/jdbc.html
+
+To access the SSL UI just go here https://coordinator-1.example.com:8081/ui/
+
 # network 
 docker network create vnet
 
@@ -69,4 +86,6 @@ open http://$(docker-machine ip default):8080
 docker-compose stop
 docker-compose rm -fv
 ```
+Build the docker images with the following command
 
+```sudo docker build --build-arg VERSION=0.217 -t mypresto .```

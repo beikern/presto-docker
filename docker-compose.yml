@@ -2,12 +2,13 @@ version: "2"
 services:
 
   coordinator-1:
-    container_name: coordinator-1
+    container_name: coordinator-1.example.com
     networks: ["vnet"]
-    hostname: coordinator-1.vnet
-    image: smizy/presto:0.217-alpine
+    hostname: coordinator-1.example.com
+    image: mypresto:latest
     ports: 
       - 8080:8080
+      - 8081:8081
     environment:
       - PRESTO_JVM_MAX_HEAP=512M
       - PRESTO_QUERY_MAX_MEMORY=1GB
@@ -18,10 +19,10 @@ services:
     command: coordinator
       
   worker-1:
-    container_name: worker-1
+    container_name: worker-1.example.com
     networks: ["vnet"]
-    hostname: worker-1.vnet
-    image: smizy/presto:0.217-alpine
+    hostname: worker-1.example.com
+    image: mypresto:latest
     depends_on: ["coordinator-1"]
     environment:
       - PRESTO_JVM_MAX_HEAP=512M
@@ -33,10 +34,10 @@ services:
     command: worker
 
   worker-2:
-    container_name: worker-2
+    container_name: worker-2.example.com
     networks: ["vnet"]
-    hostname: worker-2.vnet
-    image: smizy/presto:0.217-alpine
+    hostname: worker-2.example.com
+    image: mypresto:latest
     depends_on: ["coordinator-1"]
     environment:
       - PRESTO_JVM_MAX_HEAP=512M

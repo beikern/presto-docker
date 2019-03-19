@@ -24,6 +24,7 @@ LABEL \
 ENV PRESTO_VERSION       ${VERSION}
 ENV PRESTO_HOME          /usr/local/presto-server-${PRESTO_VERSION}
 ENV PRESTO_CONF_DIR      ${PRESTO_HOME}/etc
+ENV PRESTO_KEYSTORE_DIR  ${PRESTO_HOME}/keystore
 ENV PRESTO_NODE_DATA_DIR /presto
 ENV PRESTO_LOG_DIR       /var/log/presto
 ENV PRESTO_JVM_MAX_HEAP  16G 
@@ -31,7 +32,7 @@ ENV PRESTO_JVM_MAX_HEAP  16G
 ENV PRESTO_QUERY_MAX_MEMORY          20GB 
 ENV PRESTO_QUERY_MAX_MEMORY_PER_NODE 1GB 
 
-ENV PRESTO_DISCOVERY_URI  http://coordinator-1.vnet:8080 
+ENV PRESTO_DISCOVERY_URI  https://coordinator-1.example.com:8081 
 
 ENV JAVA_HOME   /usr/lib/jvm/default-jvm
 ENV PATH        $PATH:${JAVA_HOME}/bin:${PRESTO_HOME}/bin
@@ -88,6 +89,7 @@ RUN set -x \
 COPY etc/  ${PRESTO_CONF_DIR}/
 COPY bin/*  /usr/local/bin/
 COPY lib/*  /usr/local/lib/
+COPY keystore/* ${PRESTO_KEYSTORE_DIR}/
 
 VOLUME ["${PRESTO_LOG_DIR}", "${PRESTO_NODE_DATA_DIR}"]
 
