@@ -32,7 +32,7 @@ ENV PRESTO_JVM_MAX_HEAP  16G
 ENV PRESTO_QUERY_MAX_MEMORY          20GB 
 ENV PRESTO_QUERY_MAX_MEMORY_PER_NODE 1GB 
 
-ENV PRESTO_DISCOVERY_URI  https://coordinator-1.example.com:8081 
+ENV PRESTO_DISCOVERY_URI  http://coordinator-1.example.com:8080 
 
 ENV JAVA_HOME   /usr/lib/jvm/default-jvm
 ENV PATH        $PATH:${JAVA_HOME}/bin:${PRESTO_HOME}/bin

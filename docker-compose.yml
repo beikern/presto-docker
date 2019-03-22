@@ -9,6 +9,8 @@ services:
     ports: 
       - 8080:8080
       - 8081:8081
+    volumes:
+      - "/home/jcolomer/desarrollo/wrsources/arq/presto/presto-docker/plugin:/usr/local/presto-server-0.217/plugin"
     environment:
       - PRESTO_JVM_MAX_HEAP=512M
       - PRESTO_QUERY_MAX_MEMORY=1GB
@@ -23,6 +25,8 @@ services:
     networks: ["vnet"]
     hostname: worker-1.example.com
     image: mypresto:latest
+    volumes:
+      - "/home/jcolomer/desarrollo/wrsources/arq/presto/presto-docker/plugin:/usr/local/presto-server-0.217/plugin"
     depends_on: ["coordinator-1"]
     environment:
       - PRESTO_JVM_MAX_HEAP=512M
@@ -38,6 +42,8 @@ services:
     networks: ["vnet"]
     hostname: worker-2.example.com
     image: mypresto:latest
+    volumes:
+      - "/home/jcolomer/desarrollo/wrsources/arq/presto/presto-docker/plugin:/usr/local/presto-server-0.217/plugin"
     depends_on: ["coordinator-1"]
     environment:
       - PRESTO_JVM_MAX_HEAP=512M
@@ -51,4 +57,4 @@ services:
 networks:
   vnet:
     external:
-      name: vnet 
+      name: vnet
